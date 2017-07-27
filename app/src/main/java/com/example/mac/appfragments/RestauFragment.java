@@ -1,11 +1,13 @@
 package com.example.mac.appfragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -34,11 +36,26 @@ public class RestauFragment extends Fragment {
         ArrayList<Restau> restaus=new ArrayList<>();
         restaus.add(new Restau(R.drawable.soldenapoles,"Sol de Napoles"));
         restaus.add(new Restau(R.drawable.labrasserie,"La Brasserie"));
+        restaus.add(new Restau(R.drawable.vivabrasil,"Viva Brasil"));
+        restaus.add(new Restau(R.drawable.hooters,"Hooters"));
 
         RestauAdapter resadapter=new RestauAdapter(getActivity(),R.layout.layout_design,restaus);
 
         GridView grid=(GridView)view.findViewById(R.id.gridview);
+
         grid.setAdapter(resadapter);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (position){
+                    case 0:
+                        Intent intsol=new Intent(getContext(),SoldeNapoles.class);
+                        startActivity(intsol);
+                }
+
+            }
+        });
         return view;
     }
 }
